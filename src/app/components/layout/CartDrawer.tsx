@@ -20,6 +20,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   cartTotal,
   scrollTo
 }) => {
+  const handleCheckout = () => {
+    const phoneNumber = "525512345678"; // Reemplazar con el número real de Gustavo
+    const productList = cart.map(item => `- ${item.product.name} (x${item.quantity}) - $${(item.product.price * item.quantity).toLocaleString()}`).join('%0A');
+    const message = `Hola Gustavo! Me interesa comprar los siguientes productos de la tienda:%0A%0A${productList}%0A%0ATotal: $${cartTotal.toLocaleString()}%0A%0A¿Podrías darme seguimiento para el pago y la entrega?`;
+    
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -90,11 +98,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   <span className="text-gray-400">Total</span>
                   <span className="text-2xl font-display font-bold text-white">${cartTotal.toLocaleString()}</span>
                 </div>
-                <button className="w-full py-4 bg-primary text-primary-foreground font-display font-bold uppercase tracking-wider rounded-sm hover:bg-primary/90 transition-all">
-                  Proceder al Pago
+                <button 
+                  onClick={handleCheckout}
+                  className="w-full py-4 bg-primary text-primary-foreground font-display font-bold uppercase tracking-wider rounded-sm hover:bg-primary/90 transition-all"
+                >
+                  Finalizar Pedido vía WhatsApp
                 </button>
                 <p className="text-xs text-gray-500 text-center mt-4">
-                  Al proceder al pago serás redirigido a Mercado Pago para completar tu compra de manera segura.
+                  Al finalizar tu pedido, serás redirigido a WhatsApp para coordinar el pago y la entrega con Gustavo directamente.
                 </p>
               </div>
             )}

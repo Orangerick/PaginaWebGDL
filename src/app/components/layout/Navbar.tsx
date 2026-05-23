@@ -23,8 +23,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            <Link to="/" className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => scrollTo('hero')}>
-              <span className="font-display font-bold text-2xl tracking-tighter text-white">
+            <Link to="/" className="flex-shrink-0 flex items-center cursor-pointer group" onClick={() => scrollTo('hero')}>
+              <div className="bg-white p-2 rounded-md mr-4 shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-transform group-hover:scale-105 flex items-center justify-center">
+                <img src="/logo.jpeg" alt="Logo" className="h-12 md:h-14 w-auto object-contain" />
+              </div>
+              <span className="font-display font-bold text-2xl tracking-tighter text-white hidden sm:block">
                 GDL<span className="text-primary">.DJ</span>
               </span>
             </Link>
@@ -32,6 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="hidden md:flex items-center space-x-8">
               <button onClick={() => scrollTo('about')} className="text-sm font-medium text-gray-300 hover:text-primary transition-colors">Sobre Mí</button>
               <button onClick={() => scrollTo('services')} className="text-sm font-medium text-gray-300 hover:text-primary transition-colors">Servicios</button>
+              <button onClick={() => scrollTo('gallery')} className="text-sm font-medium text-gray-300 hover:text-primary transition-colors">Galería</button>
               <button onClick={() => scrollTo('store')} className="text-sm font-medium text-gray-300 hover:text-primary transition-colors">Tienda</button>
               <button onClick={() => scrollTo('booking')} className="text-sm font-medium text-gray-300 hover:text-primary transition-colors">Reserva</button>
               <Link to="/blog" className="text-sm font-medium text-gray-300 hover:text-primary transition-colors">Blog</Link>
@@ -66,6 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="flex flex-col space-y-6 text-center">
               <button onClick={() => scrollTo('about')} className="text-xl font-display text-white">Sobre Mí</button>
               <button onClick={() => scrollTo('services')} className="text-xl font-display text-white">Servicios</button>
+              <button onClick={() => scrollTo('gallery')} className="text-xl font-display text-white">Galería</button>
               <button onClick={() => scrollTo('store')} className="text-xl font-display text-white">Tienda</button>
               <button onClick={() => scrollTo('booking')} className="text-xl font-display text-white">Reserva</button>
               <Link to="/blog" className="text-xl font-display text-white" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>

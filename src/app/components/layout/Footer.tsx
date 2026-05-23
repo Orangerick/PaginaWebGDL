@@ -11,9 +11,12 @@ export const Footer: React.FC<FooterProps> = ({ scrollTo }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-1 md:col-span-2">
-            <span className="font-display font-bold text-2xl tracking-tighter text-white mb-4 block">
-              GDL<span className="text-primary">.DJ</span>
-            </span>
+            <div className="flex items-center mb-4">
+              <img src="/logo.jpeg" alt="Logo" className="h-10 w-auto mr-3 rounded-full" />
+              <span className="font-display font-bold text-2xl tracking-tighter text-white">
+                GDL<span className="text-primary">.DJ</span>
+              </span>
+            </div>
             <p className="text-gray-500 text-sm max-w-sm">Elevando la cultura nocturna. Producción, audio e iluminación profesional para eventos en Ciudad de México.</p>
           </div>
           <div>

@@ -42,5 +42,9 @@ mongoose.connect(MONGO_URI)
     });
   })
   .catch((err) => {
-    console.error('MongoDB connection error:', err);
+    console.error('MongoDB connection error details:');
+    console.error(err);
+    if (err instanceof Error) {
+      console.error(err.stack);
+    }
   });

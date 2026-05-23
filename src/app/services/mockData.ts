@@ -2,7 +2,7 @@ import { ServicePackage, PeoplePricing, Product, FAQ } from '../types';
 
 export const INITIAL_PACKAGES: ServicePackage[] = [
   {
-    id: 'base',
+    id: 'servicio_dj',
     name: 'Servicio Base',
     basePrice: 5500,
     hours: 5,
@@ -31,24 +31,43 @@ export const INITIAL_PEOPLE_PRICING: PeoplePricing = {
 export const PRODUCTS: Product[] = [
   {
     id: 'p1',
-    name: 'Mesa DJ Profesional',
-    price: 8500,
-    description: 'Cabina de DJ resistente con acabado oscuro y detalles en neón.',
-    measurements: '120cm x 60cm x 95cm',
-    tags: ['Cabina', 'Premium', 'Neón'],
-    color: 'Negro Mate',
-    imageUrl: 'https://images.unsplash.com/photo-1571266028243-d220c6a7edbf?w=800&q=80',
+    name: 'Cabina DJ Blanca Diamante',
+    price: 12500,
+    description: 'Cabina de diseño premium con acabado diamante blanco y retroiluminación.',
+    measurements: '150cm x 60cm x 100cm',
+    tags: ['Cabina', 'Premium', 'Blanca'],
+    color: 'Blanco Diamante',
+    imageUrl: '/gallery/Cabina DJ Blanca Diamante Frente.jpeg',
   },
   {
     id: 'p2',
-    name: 'Módulo de Luces LED',
-    price: 3200,
-    description: 'Barra de luces LED rítmicas para ambientar la cabina.',
-    measurements: '100cm x 15cm x 10cm',
-    tags: ['Iluminación', 'Accesorios'],
-    color: 'Negro',
-    amazonLink: 'https://amazon.com',
-    imageUrl: 'https://images.unsplash.com/photo-1768885510237-9238a40a4f93?w=800&q=80',
+    name: 'Cabina DJ Negra Diamante',
+    price: 11500,
+    description: 'Diseño elegante y moderno con acabado diamante negro mate.',
+    measurements: '150cm x 60cm x 100cm',
+    tags: ['Cabina', 'Moderna', 'Negra'],
+    color: 'Negro Diamante',
+    imageUrl: '/gallery/Cabina DJ Negra Diamante frente.jpeg',
+  },
+  {
+    id: 'p3',
+    name: 'Cabina DJ Blanca Triángulos',
+    price: 10500,
+    description: 'Estructura geométrica vanguardista con patrones de triángulos.',
+    measurements: '150cm x 60cm x 100cm',
+    tags: ['Cabina', 'Vanguardia'],
+    color: 'Blanco Satín',
+    imageUrl: '/gallery/Cabina DJ Blanca Triangulos.jpeg',
+  },
+  {
+    id: 'p4',
+    name: 'Cabina DJ Negra Rayado',
+    price: 9500,
+    description: 'Acabado minimalista con textura rayada profesional.',
+    measurements: '120cm x 60cm x 95cm',
+    tags: ['Cabina', 'Minimalista'],
+    color: 'Negro Rayado',
+    imageUrl: '/gallery/Cabina DJ Negra Rayado.jpeg',
   }
 ];
 

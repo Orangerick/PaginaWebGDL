@@ -15,6 +15,8 @@ interface BookingProps {
   setFormServiceId: (val: string) => void;
   formPeopleTier: keyof PeoplePricing;
   setFormPeopleTier: (val: keyof PeoplePricing) => void;
+  formTotalHours: number;
+  setFormTotalHours: (val: number) => void;
   estimatedTotal: number;
 }
 
@@ -26,6 +28,8 @@ export const Booking: React.FC<BookingProps> = ({
   setFormServiceId,
   formPeopleTier,
   setFormPeopleTier,
+  formTotalHours,
+  setFormTotalHours,
   estimatedTotal
 }) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
@@ -36,7 +40,6 @@ export const Booking: React.FC<BookingProps> = ({
     phone: '',
     email: '',
     eventType: 'fiesta',
-    totalHours: 5,
     address: ''
   });
 
@@ -63,6 +66,7 @@ export const Booking: React.FC<BookingProps> = ({
     try {
       const payload = {
         ...formData,
+        totalHours: formTotalHours,
         eventDate: selectedDate,
         packageId: formServiceId,
         peopleTier: formPeopleTier,
@@ -203,8 +207,8 @@ export const Booking: React.FC<BookingProps> = ({
                 <div className="space-y-2">
                   <label className="text-xs font-display uppercase tracking-wider text-gray-400">Horas Totales</label>
                   <select 
-                    value={formData.totalHours}
-                    onChange={e => setFormData({...formData, totalHours: Number(e.target.value)})}
+                    value={formTotalHours}
+                    onChange={e => setFormTotalHours(Number(e.target.value))}
                     className="w-full bg-white/5 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors appearance-none"
                   >
                     {[5,6,7,8,9,10].map(h => <option key={h} value={h} className="bg-background">{h} horas</option>)}
