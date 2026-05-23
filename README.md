@@ -1,9 +1,8 @@
 
-  # PaginaWebDj
+  # PaginaWebGDL
 
-  This is a code bundle for PaginaWebDj. The original project is available at https://www.figma.com/design/zirmvamuxnzFKKmuFG44W7/PaginaWebDj.
 
-  ## Running the code
+  ## Para ejecutar el code
 
   Run `npm i` to install the dependencies.
 
