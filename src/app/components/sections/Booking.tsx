@@ -36,7 +36,7 @@ export const Booking: React.FC<BookingProps> = ({
     phone: '',
     email: '',
     eventType: 'fiesta',
-    isOutdoor: false,
+    totalHours: 5,
     address: ''
   });
 
@@ -66,11 +66,16 @@ export const Booking: React.FC<BookingProps> = ({
         eventDate: selectedDate,
         packageId: formServiceId,
         peopleTier: formPeopleTier,
-        totalPrice: estimatedTotal
       };
-      await reservationService.createReservation(payload);
-      toast.success('¡Reserva creada! Redirigiendo a pago...');
-      // Here you would redirect to Mercado Pago
+      
+      const response = await reservationService.createReservation(payload);
+      
+      toast.success('¡Reserva creada! Redirigiendo a Mercado Pago...');
+      
+      // Redirect to Mercado Pago link
+      if (response.init_point) {
+        window.location.href = response.init_point;
+      }
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Error al crear la reserva');
     } finally {
@@ -101,11 +106,6 @@ export const Booking: React.FC<BookingProps> = ({
                 locale={es}
                 className="rounded-md"
               />
-              <div className="mt-4 flex items-center gap-4 text-xs">
-                <div className="flex items-center gap-1"><div className="w-3 h-3 bg-primary rounded-full"></div> Seleccionado</div>
-                <div className="flex items-center gap-1"><div className="w-3 h-3 bg-white/10 rounded-full border border-white/20"></div> Disponible</div>
-                <div className="flex items-center gap-1"><div className="w-3 h-3 bg-destructive/20 rounded-full border border-destructive/40"></div> Ocupado</div>
-              </div>
             </div>
 
             <h3 className="text-xl font-display font-bold mb-6 text-white flex items-center gap-2">
@@ -141,7 +141,7 @@ export const Booking: React.FC<BookingProps> = ({
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-display uppercase tracking-wider text-gray-400">Teléfono (WhatsApp)</label>
+                  <label className="text-xs font-display uppercase tracking-wider text-gray-400">WhatsApp</label>
                   <input 
                     type="tel" 
                     value={formData.phone}
@@ -183,7 +183,6 @@ export const Booking: React.FC<BookingProps> = ({
                     <option value="fiesta" className="bg-background">Fiesta Privada</option>
                     <option value="boda" className="bg-background">Boda</option>
                     <option value="corporativo" className="bg-background">Corporativo</option>
-                    <option value="otro" className="bg-background">Otro</option>
                   </select>
                 </div>
               </div>
@@ -202,18 +201,29 @@ export const Booking: React.FC<BookingProps> = ({
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-display uppercase tracking-wider text-gray-400">Personas</label>
+                  <label className="text-xs font-display uppercase tracking-wider text-gray-400">Horas Totales</label>
                   <select 
-                    value={formPeopleTier}
-                    onChange={(e) => setFormPeopleTier(e.target.value as keyof PeoplePricing)}
+                    value={formData.totalHours}
+                    onChange={e => setFormData({...formData, totalHours: Number(e.target.value)})}
                     className="w-full bg-white/5 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors appearance-none"
                   >
-                    <option value="tier1" className="bg-background">10 - 100</option>
-                    <option value="tier2" className="bg-background">100 - 200</option>
-                    <option value="tier3" className="bg-background">200 - 300</option>
-                    <option value="tier4" className="bg-background">300+</option>
+                    {[5,6,7,8,9,10].map(h => <option key={h} value={h} className="bg-background">{h} horas</option>)}
                   </select>
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-display uppercase tracking-wider text-gray-400">Personas</label>
+                <select 
+                  value={formPeopleTier}
+                  onChange={(e) => setFormPeopleTier(e.target.value as keyof PeoplePricing)}
+                  className="w-full bg-white/5 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors appearance-none"
+                >
+                  <option value="tier1" className="bg-background">10 - 100</option>
+                  <option value="tier2" className="bg-background">100 - 200</option>
+                  <option value="tier3" className="bg-background">200 - 300</option>
+                  <option value="tier4" className="bg-background">300+</option>
+                </select>
               </div>
 
               <div className="space-y-2">
@@ -228,16 +238,20 @@ export const Booking: React.FC<BookingProps> = ({
               </div>
 
               <div className="pt-4 border-t border-white/10">
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center mb-2">
                   <span className="text-gray-400 text-sm">Costo Estimado:</span>
-                  <span className="text-2xl font-display font-bold text-white">${estimatedTotal.toLocaleString()} <span className="text-sm text-gray-500 font-sans">MXN</span></span>
+                  <span className="text-2xl font-display font-bold text-white">${estimatedTotal.toLocaleString()} MXN</span>
+                </div>
+                <div className="flex justify-between items-center mb-6">
+                  <span className="text-gray-400 text-sm italic">Anticipo requerido:</span>
+                  <span className="text-xl font-display font-bold text-primary">$1,500 MXN</span>
                 </div>
                 <button 
                   type="submit" 
                   disabled={isSubmitting || !selectedDate}
-                  className="w-full py-4 bg-primary text-primary-foreground font-display font-bold uppercase tracking-wider rounded-sm hover:bg-primary/90 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-4 bg-primary text-primary-foreground font-display font-bold uppercase tracking-wider rounded-sm hover:bg-primary/90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Procesando...' : 'Reservar con Anticipo ($1,500)'} <ArrowRight className="w-4 h-4" />
+                  {isSubmitting ? 'Procesando...' : 'Pagar Anticipo en Mercado Pago'} <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </form>

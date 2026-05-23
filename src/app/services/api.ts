@@ -41,3 +41,14 @@ export const reservationService = {
     return response.data;
   }
 };
+
+export const pricingService = {
+  getPricing: async () => {
+    const response = await api.get('/pricing');
+    return response.data;
+  },
+  updatePricing: async (data: any) => {
+    const response = await api.post('/pricing', data);
+    return response.data;
+  }
+};
