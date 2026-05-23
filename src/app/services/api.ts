@@ -52,3 +52,14 @@ export const pricingService = {
     return response.data;
   }
 };
+
+export const productService = {
+  getProducts: async () => {
+    const response = await api.get('/products');
+    return response.data;
+  },
+  createProduct: async (data: any) => {
+    const response = await api.post('/products', data);
+    return response.data;
+  }
+};

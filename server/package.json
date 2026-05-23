@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon --exec node --loader ts-node/esm src/index.ts"
+    "dev": "nodemon --exec node --loader ts-node/esm src/index.ts",
+    "seed": "node --loader ts-node/esm src/seed.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

@@ -8,6 +8,7 @@ import reservationRoutes from './routes/reservationRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import pricingRoutes from './routes/pricingRoutes.js';
 import paymentRoutes from './routes/paymentRoutes.js';
+import productRoutes from './routes/productRoutes.js';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use('/api/reservations', reservationRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/pricing', pricingRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/products', productRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'PaginaWebDj API is running' });
