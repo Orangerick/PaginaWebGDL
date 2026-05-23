@@ -1,10 +1,8 @@
 import React from 'react';
-import { ShoppingCart, Menu, X, Settings } from 'lucide-react';
+import { ShoppingCart, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface NavbarProps {
-  isAdmin: boolean;
-  setIsAdmin: (val: boolean) => void;
   cartCount: number;
   setIsCartOpen: (val: boolean) => void;
   scrollTo: (id: string) => void;
@@ -13,8 +11,6 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  isAdmin,
-  setIsAdmin,
   cartCount,
   setIsCartOpen,
   scrollTo,
@@ -41,9 +37,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
 
             <div className="flex items-center space-x-4">
-              <button onClick={() => setIsAdmin(!isAdmin)} className={`p-2 rounded-full transition-colors ${isAdmin ? 'bg-accent/20 text-accent' : 'text-gray-400 hover:text-white'}`} title="Admin Mode">
-                <Settings className="w-5 h-5" />
-              </button>
               <button onClick={() => setIsCartOpen(true)} className="relative p-2 text-gray-300 hover:text-primary transition-colors">
                 <ShoppingCart className="w-5 h-5" />
                 {cartCount > 0 && (

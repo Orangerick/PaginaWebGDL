@@ -19,7 +19,6 @@ import {
 import { CartItem, Product, ServicePackage, PeoplePricing } from '../types';
 
 export const Home: React.FC = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -63,8 +62,6 @@ export const Home: React.FC = () => {
       </Helmet>
 
       <Navbar 
-        isAdmin={isAdmin} 
-        setIsAdmin={setIsAdmin} 
         cartCount={cartCount} 
         setIsCartOpen={setIsCartOpen} 
         scrollTo={scrollTo}
@@ -77,13 +74,13 @@ export const Home: React.FC = () => {
         <About />
         <Services 
           packages={packages} 
-          isAdmin={isAdmin} 
+          isAdmin={false} 
           setPackages={setPackages} 
           scrollTo={scrollTo} 
         />
         <Store 
           products={PRODUCTS} 
-          isAdmin={isAdmin} 
+          isAdmin={false} 
           addToCart={addToCart} 
         />
         <Booking 
@@ -107,11 +104,6 @@ export const Home: React.FC = () => {
         setCart={setCart} 
         cartTotal={cartTotal} 
         scrollTo={scrollTo}
-      />
-
-      <AdminQuickMenu 
-        isVisible={isAdmin} 
-        onExit={() => setIsAdmin(false)} 
       />
     </div>
   );

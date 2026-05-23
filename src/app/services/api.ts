@@ -6,6 +6,30 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('adminToken');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+export const authService = {
+  login: async (credentials: any) => {
+    const response = await api.post('/auth/login', credentials);
+    if (response.data.token) {
+      localStorage.setItem('adminToken', response.data.token);
+    }
+    return response.data;
+  },
+  logout: () => {
+    localStorage.removeItem('adminToken');
+  },
+  isAuthenticated: () => {
+    return !!localStorage.getItem('adminToken');
+  }
+};
+
 export const reservationService = {
   getAvailability: async (month: number, year: number) => {
     const response = await api.get(`/reservations/availability?month=${month}&year=${year}`);
